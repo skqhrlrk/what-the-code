@@ -1,0 +1,96 @@
+<!doctype Html>
+<html>
+<meta charset="utf-8" />
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<style>
+
+
+#quote-box {
+        height: 500px;
+        position: relative;
+        border: 3px solid green;
+        background-color:pink;
+        color:black
+    }
+
+#center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+    
+</style>
+
+
+
+</head>
+<body onload="randomQuote1()"></body>
+
+
+
+
+
+<main>
+        <div id="quote-box" >
+            <div id="center">
+                <div id="text"></div>
+                <div id="author"></div>
+                <div ><button id="new-quote" onclick="randomQuote1()">Change</button></div>
+                <div><button id="tweet-quote" onclick="tweetOpen()">Tweet</button></div>
+              </div>
+            </div>
+             
+
+
+</main>
+<script>
+
+
+   
+
+    function randomQuote1() {
+      
+
+    fetch('https://api.quotable.io/random').then(function(response){
+                response.json().then(function(text){
+                    console.log(text);
+                    document.getElementById("text").innerHTML=text["content"];
+                    document.getElementById("author").innerHTML=text["author"];
+                })
+            })
+
+  function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+ 
+}
+
+
+
+function setRandomColor() {
+  $("#quote-box").css("background-color", getRandomColor());
+}
+  };
+  
+  
+
+
+  function tweetOpen(){
+    
+    window.open("https://twitter.com/intent/tweet?text= " +document.getElementById("text").innerHTML + document.getElementById("author").innerHTML);
+  };
+
+  
+
+  
+</script>
+</html>
